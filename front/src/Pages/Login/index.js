@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 
-import { ImagemUsuario, ImagemSenha, ToggleButton, Imagemtopo, AjustarInput, Geral, Titulo, ConteudoForm, AlertSuccess, AlertDanger, Form, Container, Label, Input, ButtonSuccess,  ConteudoTitulo} from './styles';
+import { ImagemUsuario, ImagemSenha, ToggleButton, Imagemtopo, AjustarInput, Geral, ConteudoForm,  AlertDanger, Form, Container, Input, ButtonSuccess,  ConteudoTitulo} from './styles';
 
 
 export function Login({statusLogin}){
@@ -50,7 +50,7 @@ export function Login({statusLogin}){
     }).catch(() => {
       setStatus({
         type: 'erro', 
-        mensagem: 'naos logado',
+        mensagem: 'Erro na conexão com a API',
       });
     });
   }
