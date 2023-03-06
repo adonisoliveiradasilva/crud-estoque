@@ -3,12 +3,15 @@ import Search  from "../../Imagens/search.png";
 import Lapis  from "../../Imagens/lapis.png";
 import Logo from "../../Imagens/logo.png";
 import Quantidade from "../../Imagens/produto.png";
+import SetaDireita from "../../Imagens/seta-direita.png";
+import SetaEsquerda from "../../Imagens/seta-esquerda.png";
 
 export const AlertDanger = styled.section`
     width: 250px;
     height: 20px;
     padding: 10px;
     background-color: red;
+    top: -30px;
     position: absolute;
     left: calc(50% - 125px);
     color: #282828;
@@ -26,6 +29,7 @@ export const AlertSucess = styled.section`
     height: 20px;
     padding: 10px;
     background-color: red;
+    top: -30px;
     position: absolute;
     left: calc(50% - 125px);
     color: #282828;
@@ -54,6 +58,42 @@ export const Geral = styled.section`
 export const Tabela = styled.section`
     width: 100%;
     height: 100%;
+`;
+
+export const Paginacao = styled.section`
+    display: flex;
+    width: 100px;
+    margin-left: auto;
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    bottom: 10px;
+
+    button{
+        width: 40px;
+        height: 40px;
+        border-radius: 40px;
+        border: none;
+        background-color: #0AC2C5;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 40%;
+        cursor: pointer;
+    }
+`;
+
+export const BotaoDireito = styled.button`
+    background-image: url(${SetaDireita});
+    position: absolute;
+    right: 10px;
+    bottom: 0;
+`;
+
+export const BotaoEsquerdo = styled.button`
+    background-image: url(${SetaEsquerda});
+    position: absolute;
+    left: 0;
+    bottom: 0;
 `;
 
 export const TabelaTopo = styled.section`

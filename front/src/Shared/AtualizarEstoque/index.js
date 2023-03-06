@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Geral, Tabela, TabelaTopo, Titulo, Pesquisa, Lupa, Campo, BotaoEditar, TabelaConteudo, AlertDanger, AlertSucess, ModalEditar, TopoModalEditar, BotaoSair, CampoEditar, Label, BotaoEnviar, CampoModal, ImagemNome, ImagemQuantidade, Form} from "./style";
+import { Geral, Tabela, Paginacao, BotaoDireito, BotaoEsquerdo, TabelaTopo, Titulo, Pesquisa, Lupa, Campo, BotaoEditar, TabelaConteudo, AlertDanger, AlertSucess, ModalEditar, TopoModalEditar, BotaoSair, CampoEditar, Label, BotaoEnviar, CampoModal, ImagemNome, ImagemQuantidade, Form, BotaoDireito as BotaoDireito2} from "./style";
 
 
 function AtualizarEstoque(){
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
+
 
     const [data, setData] = useState([]);
     const [mostrarModal, setMostrarModal] = useState(false);
@@ -16,6 +19,67 @@ function AtualizarEstoque(){
         quantidade: ''
     });
 
+    const renderItems = () => {
+        const start = (currentPage - 1) * itemsPerPage;
+        const end = start + itemsPerPage;
+        return Object.values(data)
+          .sort((a, b) => new Date(b.data_alteracao) - new Date(a.data_alteracao))
+          .slice(start, end)
+          .map((produto) => (
+            <tr key={produto.id}>
+              <td> {produto.id} </td>
+              <td> {produto.nome} </td>
+              <td> {produto.marca} </td>
+              <td> {produto.quantidade} </td>
+              <td> {produto.data_alteracao} </td>
+              <td>
+                <BotaoEditar
+                  onClick={() => handleEditar(produto.id, produto.quantidade)}
+                >
+                  {" "}
+                </BotaoEditar>{" "}
+              </td>
+            </tr>
+          ));
+      };
+
+      const renderPageButtons = () => {
+        const totalPages = Math.ceil(Object.values(data).length / itemsPerPage);
+        const pageButtons = [];
+      
+        if (totalPages === 1 && currentPage !== 1) {
+          setCurrentPage(1);
+        } else {
+          // Botão de página anterior
+          if (currentPage > 1) {
+            pageButtons.push(
+              <BotaoEsquerdo
+                key="previous"
+                onClick={() => setCurrentPage(currentPage - 1)}
+              >
+                
+              </BotaoEsquerdo>
+            );
+          }
+          
+          // Botão de próxima página
+          if (currentPage < totalPages) {
+            pageButtons.push(
+              <BotaoDireito
+                key="next"
+                onClick={() => setCurrentPage(currentPage + 1)}
+              >
+                
+              </BotaoDireito>
+            );
+          }
+        }
+        
+        return pageButtons;
+      };
+      
+
+        
         const getProdutos = async (requestData) => {
             const requestOptions = {
             method: 'POST',
@@ -33,7 +97,6 @@ function AtualizarEstoque(){
                     })
                 }
                 setData(responseJson.records);
-                
             }
             );
         }
@@ -76,7 +139,7 @@ function AtualizarEstoque(){
         const editQuantidade = async e => {
             e.preventDefault();
             
-            await fetch("http://localhost/api-crud-php/editar.php",{
+            await fetch("http://localhost/api-crud-php/editar_estoque.php",{
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
@@ -131,28 +194,19 @@ function AtualizarEstoque(){
                 <TabelaConteudo>
                     <thead>
                         <tr>
-                            <th> ID </th>
-                            <th> Nome </th>
-                            <th> Marca </th>
-                            <th> Quantidade </th>
-                            <th> Alteração </th>
-                            <th> Ações </th>
+                        <th> ID </th>
+                        <th> Nome </th>
+                        <th> Marca </th>
+                        <th> Quantidade </th>
+                        <th> Alteração </th>
+                        <th> Ações </th>
                         </tr>
                     </thead>
 
-                    <tbody>
-                        {Object.values(data).map(produto => (
-                            <tr key={produto.id}>
-                            <td> {produto.id} </td>
-                            <td> {produto.nome} </td>
-                            <td> {produto.marca} </td>
-                            <td> {produto.quantidade} </td>
-                            <td> {produto.data_alteracao} </td>
-                            <td> <BotaoEditar onClick={ () => handleEditar(produto.id, produto.quantidade)}> </BotaoEditar> </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </TabelaConteudo>
+                    <tbody>{renderItems()}</tbody>
+                    </TabelaConteudo>
+
+                    <Paginacao>{renderPageButtons()}</Paginacao>
             </Tabela>
 
             {mostrarModal === true ? 
