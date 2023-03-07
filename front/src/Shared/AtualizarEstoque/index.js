@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Geral, Tabela, Paginacao, BotaoDireito, BotaoEsquerdo, TabelaTopo, Titulo, Pesquisa, Lupa, Campo, BotaoEditar, TabelaConteudo, AlertDanger, AlertSucess, ModalEditar, TopoModalEditar, BotaoSair, CampoEditar, Label, BotaoEnviar, CampoModal, ImagemNome, ImagemQuantidade, Form, BotaoDireito as BotaoDireito2} from "./style";
+import { Geral, Tabela, Paginacao, BotaoDireito, BotaoEsquerdo, TabelaTopo, Titulo, Pesquisa, Lupa, Campo, BotaoEditar, TabelaConteudo, AlertDanger, AlertSucess, ModalEditar, TopoModalEditar, BotaoSair, CampoEditar, Label, BotaoEnviar, CampoModal, ImagemNome, ImagemQuantidade, Form} from "./style";
 
 
 function AtualizarEstoque(){
@@ -235,7 +235,7 @@ function AtualizarEstoque(){
                     <BotaoEnviar type="submit">Salvar</BotaoEnviar>
                 </Form>
             </ModalEditar>
-
+  
     
 
             : ""}

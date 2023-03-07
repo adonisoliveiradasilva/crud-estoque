@@ -131,6 +131,9 @@ export const Lupa = styled.button`
     margin-right: auto;
     border: none;
     cursor: pointer;
+    -webkit-box-shadow: 0px 10px 11px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 11px -6px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 11px -6px rgba(0,0,0,0.75);
 `;
 
 export const Campo = styled.input`
@@ -142,7 +145,9 @@ export const Campo = styled.input`
     border: none;
     border-radius: 20px;
     padding: 0 50px;
-
+    -webkit-box-shadow: 0px 10px 11px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 11px -6px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 11px -6px rgba(0,0,0,0.75);
 
     :focus{
         outline: none;
@@ -266,7 +271,7 @@ export const ImagemNome = styled.section`
     background-image: url(${Logo});
     background-position: center;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: 80%;
     position: absolute;
     left: 5%;
 `;
@@ -277,7 +282,7 @@ export const ImagemQuantidade = styled.section`
     background-image: url(${Quantidade});
     background-position: center;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: 80%;
     position: absolute;
     left: 5%;
 `;
@@ -309,7 +314,7 @@ export const CampoEditar = styled.input`
     color: #5C5B5B;
     background-color: #F1F1F1;
     font-weight: 900;
-    font-size: 20px;
+    font-size: 18px;
     padding-left: 50px;
     margin-bottom: 15px;
 
