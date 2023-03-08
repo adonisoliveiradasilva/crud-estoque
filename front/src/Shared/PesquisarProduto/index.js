@@ -1,8 +1,6 @@
 import React, { useState, useEffect} from "react";
-import { Geral, Tabela, Paginacao, BotaoDireito, BotaoConfirmar, BotaoEsquerdo, TabelaTopo, Titulo, TituloApagar, Pesquisa, NovoProduto ,Lupa, Campo, BotaoEditar, BotaoApagar, CampoApagar, TabelaConteudo, AlertDanger, AlertSucess, ModalEditar, TopoModalEditar, ModalApagar, TopoModalApagar, BotaoSair, CampoEditar, Label, BotaoEnviar, CampoModal, ImagemNome, ImagemMarca, ImagemPrecoCompra, ImagemPrecoVenda, Form, ModalCadastrar, TopoModalCadastrar} from "./style";
+import { Geral, Tabela, Paginacao, Acoes, CampoMarca, BotaoDireito, BotaoConfirmar, BotaoEsquerdo, TabelaTopo, Titulo, TituloApagar, Pesquisa, NovoProduto ,Lupa, Campo, BotaoEditar, BotaoApagar, CampoApagar, TabelaConteudo, AlertDanger, AlertSucess, ModalEditar, TopoModalEditar, ModalApagar, TopoModalApagar, BotaoSair, CampoEditar, Label, BotaoEnviar, CampoModal, ImagemNome, ImagemMarca, ImagemPrecoCompra, ImagemPrecoVenda, Form, ModalCadastrar, TopoModalCadastrar} from "./style";
 
-
-/* Ta dando erro nas respostas dos erros */
 
 function PesquisarProduto(){
     const [currentPage, setCurrentPage] = useState(1);
@@ -11,15 +9,21 @@ function PesquisarProduto(){
 
     const [produto, setProduto] = useState({
         nome: '',
-        marca: '',
+        nome_marca: '',
         preco_compra: '',
         preco_venda: '',
     })
 
+    const [marcas, setMarcas] = useState({
+        nome: '',
+    })
+
+
     const [dataId, setDataId] = useState({
         id: '',
         nome: '',
-        marca: '',
+        id_marca: '',
+        nome_marca: '',
         preco_compra: '',
         preco_venda: '',
     });
@@ -102,13 +106,15 @@ function PesquisarProduto(){
                 mensagem: 'Erro na conexão com API!',
             });
         });
+
+        getProdutos({ id: null });
     }
 
     const handleEditar = (produtoId, produtoNome, produtoMarca, produtoCompra, produtoVenda) => {
         setDataId({
             id: produtoId,
             nome: produtoNome,
-            marca: produtoMarca,
+            id_marca: produtoMarca,
             preco_compra: produtoCompra,
             preco_venda: produtoVenda,
         });
@@ -119,7 +125,7 @@ function PesquisarProduto(){
         setDataId({
             id: produtoId,
             nome: produtoNome,
-            marca: produtoMarca,
+            nome_marca: produtoMarca,
             preco_compra: produtoCompra,
             preco_venda: produtoVenda,
         });
@@ -135,24 +141,25 @@ function PesquisarProduto(){
           .slice(start, end)
           .map((produto) => (
             <tr key={produto.id}>
-              <td> {produto.id} </td>
-              <td> {produto.nome} </td>
-              <td> {produto.marca} </td>
-              <td> {produto.preco_compra} </td>
-              <td> {produto.preco_venda} </td>
-              <td> {produto.data_alteracao}</td>
-              <td>
-                <BotaoEditar
-                  onClick={() => handleEditar(produto.id, produto.nome, produto.marca, produto.preco_compra, produto.preco_venda)}
-                >
-                  {" "}
-                </BotaoEditar>{" "}
+                <td> {produto.id} </td>
+                <td> {produto.nome} </td>
+                <td> {produto.nome_marca} </td>
+                <td> {produto.preco_compra} </td>
+                <td> {produto.preco_venda} </td>
+                <td> {produto.data_alteracao}</td>
+                <td>
+                    <BotaoEditar
+                    onClick={() => handleEditar(produto.id, produto.nome, produto.id_marca, produto.preco_compra, produto.preco_venda)}
 
-                <BotaoApagar
-                  onClick={() => handleApagar(produto.id, produto.nome, produto.marca, produto.preco_compra, produto.preco_venda)}
-                >
-                  {" "}
-                </BotaoApagar>{" "}
+                    >
+                    {" "}
+                    </BotaoEditar>{" "}
+            
+                    <BotaoApagar
+                    onClick={() => handleApagar(produto.id, produto.nome, produto.id_marca, produto.preco_compra, produto.preco_venda)}
+                    >
+                    {" "}
+                    </BotaoApagar>{" "}
               </td>
             </tr>
           ));
@@ -213,15 +220,33 @@ function PesquisarProduto(){
         }
         );
     }
-
     useEffect(() => {
         getProdutos({ id: null });
     }, [])
 
 
+    const getMarcas = async (requestData) => {
+        const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(requestData)
+        };
+    
+        fetch("http://localhost/api-crud-php/listar_marcas.php", requestOptions)
+        .then((response) => response.json())
+        .then((responseJson) => {
+            setMarcas(responseJson.records);
+        }
+        );
+    }
+
+    useEffect(() => {
+        getMarcas({ id: null });
+    }, [])
+
+
     const editProduto = async (e) => {
         e.preventDefault();
-
         try {
           const response = await fetch("http://localhost/api-crud-php/editar_produto.php", {
             method: "POST",
@@ -231,10 +256,12 @@ function PesquisarProduto(){
             body: JSON.stringify({
               id: dataId.id,
               nome: dataId.nome,
-              marca: dataId.marca,
+              quantidade: dataId.quantidade,
+              id_marca: dataId.id_marca,
               preco_compra: dataId.preco_compra,
               preco_venda: dataId.preco_venda,
             }),
+            
           });
       
           const responseJson = await response.json();
@@ -259,14 +286,15 @@ function PesquisarProduto(){
             mensagem: "Produto não editado com sucesso, tente mais tarde!",
           });
         }
+
+        getProdutos({id: null})
     };
 
     const delProduto = async e =>{
-    
+
         e.preventDefault();
         handleModalApagar(false);
-
-        console.log(dataId);
+    
         
         await fetch("http://localhost/api-crud-php/apagar_produto.php", {
             method: 'POST',
@@ -276,8 +304,7 @@ function PesquisarProduto(){
             body: JSON.stringify({
                 id: dataId.id
             }),
-            
-
+        
         })
         .then((response) => response.json())
         .then((responseJson) => {
@@ -292,6 +319,8 @@ function PesquisarProduto(){
                 type: 'success',
                 mensagem: responseJson.mensagem,
                 })
+                
+                getProdutos({ id: null });
             }
         }).catch(() => {
             setStatusProduto({
@@ -302,7 +331,6 @@ function PesquisarProduto(){
 
         getProdutos({ id: null });
     }
-      
 
 
 
@@ -375,7 +403,11 @@ function PesquisarProduto(){
                     </CampoModal>
                     <CampoModal>
                         <ImagemMarca></ImagemMarca>
-                        <CampoEditar type="text" name="marca" placeholder="Marca" onChange={valorInput}/>
+                            <CampoMarca name="marca" placeholder="Marca" onChange={valorInput}>
+                                {/* validar se a pessoa selecionou diferente de null */}
+                                <option value={null}>Selecione uma marca</option>
+                                {Object.values(marcas).map(marca => <option key={marca.id} value={marca.id}>{marca.nome}</option>)}
+                            </CampoMarca>
                     </CampoModal>
                     <CampoModal>
                         <ImagemPrecoCompra></ImagemPrecoCompra>
@@ -413,17 +445,12 @@ function PesquisarProduto(){
                 </CampoModal>
                 <CampoModal>
                     <ImagemMarca></ImagemMarca>
-                    <CampoEditar
-                    type="text"
-                    name="marca"
-                    placeholder={dataId.marca}
-                    onChange={(e) =>
-                        setDataId({
-                        ...dataId,
-                        marca: e.target.value // Update 'marca' property
-                        })
-                    }
-                    />
+                    <CampoMarca name="marca" placeholder="Marca" onChange={(e) => setDataId({ ...dataId, id_marca: e.target.value })}>
+                        {/* validar se a pessoa selecionou diferente de null */}
+                        <option value={null}> Selecione uma marca </option>
+                        {Object.values(marcas).map(marca => <option key={marca.id} value={marca.id}>{marca.nome}</option>)}
+                    </CampoMarca>
+
                 </CampoModal>
                 <CampoModal>
                     <ImagemPrecoCompra></ImagemPrecoCompra>

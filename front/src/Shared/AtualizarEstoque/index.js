@@ -29,7 +29,7 @@ function AtualizarEstoque(){
             <tr key={produto.id}>
               <td> {produto.id} </td>
               <td> {produto.nome} </td>
-              <td> {produto.marca} </td>
+              <td> {produto.nome_marca} </td>
               <td> {produto.quantidade} </td>
               <td> {produto.data_alteracao} </td>
               <td>
@@ -87,7 +87,7 @@ function AtualizarEstoque(){
             body: JSON.stringify(requestData)
             };
         
-            fetch("http://localhost/api-crud-php/listar_estoque.php", requestOptions)
+            fetch("http://localhost/api-crud-php/listar_produtos.php", requestOptions)
             .then((response) => response.json())
             .then((responseJson) => {
                 if (Object.values(responseJson.records)[0].erro){

@@ -265,7 +265,7 @@ export const TabelaConteudo = styled.table`
 
 export const ModalEditar= styled.div`
     width: 400px;
-    height: 450px;
+    height: 300px;
     background-color: aliceblue;
     position: absolute;
     left: calc(50% - 200px);
@@ -297,7 +297,7 @@ export const TopoModalEditar= styled.div`
 
 export const ModalCadastrar = styled.div`
     width: 400px;
-    height: 450px;
+    height: 300px;
     background-color: aliceblue;
     position: absolute;
     left: calc(50% - 200px);
@@ -329,7 +329,7 @@ export const TopoModalCadastrar= styled.div`
 
 export const ModalApagar= styled.div`
     width: 400px;
-    height: 450px;
+    height: 350px;
     background-color: aliceblue;
     position: absolute;
     left: calc(50% - 200px);
@@ -458,7 +458,6 @@ export const CampoEditar = styled.input`
     }
 `;
 
-
 export const CampoMarca = styled.select`
     width: calc(90%);
     height: 40px;
@@ -500,7 +499,7 @@ export const CampoApagar = styled.label`
 
     display: flex;    
     align-items: center;
-
+    
     :focus{
         outline: none;
     }
