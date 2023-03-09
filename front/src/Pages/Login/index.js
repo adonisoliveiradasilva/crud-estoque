@@ -50,7 +50,7 @@ export function Login({statusLogin}){
     }).catch(() => {
       setStatus({
         type: 'erro', 
-        mensagem: 'Erro na conexão com a API',
+        mensagem: 'Erro de autenticação!',
       });
     });
   }

@@ -41,16 +41,17 @@ function PesquisarMarca(){
           .slice(start, end)
           .map((marca) => (
             <tr key={marca.id}>
-              <td> {marca.id} </td>
-              <td> {marca.nome} </td>
-              <td>
-                <BotaoEditar onClick={() => handleEditar(marca.id, marca.nome)}>
-                  {" "}
-                </BotaoEditar>{" "}
-                <BotaoApagar onClick={() => handleApagar(marca.id, marca.nome)}>
-                  {" "}
-                </BotaoApagar>{" "}
-              </td>
+                <td> {marca.id} </td>
+                <td> {marca.nome} </td>
+                <td></td>
+                <td>
+                    <BotaoEditar onClick={() => handleEditar(marca.id, marca.nome)}>
+                    {" "}
+                    </BotaoEditar>{" "}
+                    <BotaoApagar onClick={() => handleApagar(marca.id, marca.nome)}>
+                    {" "}
+                    </BotaoApagar>{" "}
+                </td>
             </tr>
         ));
     };
@@ -295,6 +296,7 @@ function PesquisarMarca(){
                         <tr>
                         <th> ID </th>
                         <th> Nome </th>
+                        <th></th>
                         <th> Ações </th>
                         </tr>
                     </thead>

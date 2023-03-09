@@ -15,6 +15,7 @@ function App() {
   useEffect(() => {
     const timer = setTimeout(() => {
       localStorage.removeItem('statusLogin');
+  
       setStatusLogin(null);
     }, 5 * 60 * 1000); // 5 minutos em milissegundos
 

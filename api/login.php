@@ -15,10 +15,10 @@ $dados = json_decode($response_json, true);
 
 if($dados){
 
-    $query_login = "SELECT tipo_usuario FROM usuarios WHERE user=:user AND senha=:senha";
+    $query_login = "SELECT tipo_usuario FROM usuarios WHERE id=:id AND senha=:senha";
     $login_usuario = $conn -> prepare($query_login);
     
-    $login_usuario -> bindParam(':user', $dados['usuario']['user'], PDO::PARAM_STR);
+    $login_usuario -> bindParam(':id', $dados['usuario']['user'], PDO::PARAM_STR);
     $login_usuario -> bindParam(':senha', $dados['usuario']['senha'], PDO::PARAM_STR);
 
     $login_usuario -> execute();
