@@ -4,13 +4,15 @@ import { Geral, Tabela, TabelaTopo, Titulo,  AlertDanger, AlertSucess, ModalEdit
 function AlterarDadosUsuario(){
 
     const [usuario, setUsuario] = useState({
-        id: localStorage.getItem('id'),
-        nome: '',
-        cpf: '',
-        nascimento: '',
-        tipo_usuario: localStorage.getItem('tipo_usuario')
+        id: localStorage.getItem('id_usuario'),
+        nome: localStorage.getItem('nome_usuario'),
+        cpf: localStorage.getItem('cpf_usuario'),
+        nascimento: localStorage.getItem('nascimento_usuario'),
+        senha: localStorage.getItem('senha_usuario'),
+        tipo_usuario: localStorage.getItem('tipo_usuario'),
+        confirmar_senha: localStorage.getItem('senha_usuario'), 
     })
-
+    
     const [statusUsuario, setStatusUsuario] = useState({
         type: '',
         mensagem: ''
@@ -44,18 +46,20 @@ function AlterarDadosUsuario(){
     }, [statusUsuario]);
 
   
-    const handleEditar = (usuarioId, usuarioNome, usuarioCpf, usuarioNascimento, usuarioSenha) => {
+    const handleEditar = (usuarioNome, usuarioCpf, usuarioNascimento, usuarioSenha) => {
         setUsuario({
-            id: usuarioId,
+            id: localStorage.getItem('id_usuario'),
             nome: usuarioNome,
             cpf: usuarioCpf,
             nascimento: usuarioNascimento,
             senha: usuarioSenha,
+            tipo_usuario: localStorage.getItem('tipo_usuario'),
         });
     };
 
     const valorInput = e => setUsuario({ ...usuario, [e.target.name]: e.target.value});
-    
+
+
     async function editUsuario(e) {
         e.preventDefault();
 
@@ -64,44 +68,55 @@ function AlterarDadosUsuario(){
                 type: 'erro', 
                 mensagem: 'Senhas Diferentes!',
             });
+        }else if(usuario.cpf !== localStorage.getItem('cpf_usuario')){
+            localStorage.setItem('cpf_usuario', usuario.cpf);
+        }
+        else if(usuario.nome !== localStorage.getItem('nome_usuario')){
+            localStorage.setItem('nome_usuario', usuario.nome);
+        }
+        else if(usuario.nascimento !== localStorage.getItem('nascimento_usuario')){
+            localStorage.setItem('nascimento_usuario', usuario.nascimento);
+        }
+        else if(usuario.senha !== localStorage.getItem('senha_usuario')){
+            localStorage.setItem('senha_usuario', usuario.senha);
         }else{  
-            console.log(usuario.id);
-            // try {
-            //     const response = await fetch("http://localhost/api-crud-php/editar_usuario.php", {
-            //         method: "POST",
-            //         headers: {
-            //             "Content-Type": "application/json",
-            //         },
-            //         body: JSON.stringify({
-            //         id: usuario.id,
-            //         nome: usuario.nome,
-            //         cpf: usuario.cpf,
-            //         nascimento: usuario.nascimento,
-            //         senha: usuario.senha,
-            //         tipo_usuario: 1,
-            //         }),
-            //     });
         
-            // const responseJson = await response.json();
+            try {
+                const response = await fetch("http://localhost/api-crud-php/editar_usuario.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                    id: usuario.id,
+                    nome: usuario.nome,
+                    cpf: usuario.cpf,
+                    nascimento: usuario.nascimento,
+                    senha: usuario.senha,
+                    tipo_usuario: usuario.tipo_usuario,
+                    }),
+                });
         
-            // if (responseJson.erro) {
-            //     setStatusUsuario({
-            //     type: "erro",
-            //     mensagem: responseJson.mensagem,
-            //     });
-            // } else {
-            //     setStatusUsuario({
-            //     type: "success",
-            //     mensagem: responseJson.mensagem,
-            //     });
-            // }
+            const responseJson = await response.json();
         
-            // } catch (error) {
-            //     setStatusUsuario({
-            //         type: "erro",
-            //         mensagem: "Usuario não editado com sucesso, tente mais tarde!",
-            //     });
-            // }
+            if (responseJson.erro) {
+                setStatusUsuario({
+                type: "erro",
+                mensagem: responseJson.mensagem,
+                });
+            } else {
+                setStatusUsuario({
+                type: "success",
+                mensagem: responseJson.mensagem,
+                });
+            }
+        
+            } catch (error) {
+                setStatusUsuario({
+                    type: "erro",
+                    mensagem: "Usuario não editado com sucesso, tente mais tarde!",
+                });
+            }
         }
     }
 
@@ -113,6 +128,14 @@ function AlterarDadosUsuario(){
         }));
     }
 
+    const getUsuarios = async (requestData) => {
+        console.log(usuario)
+    }
+    useEffect(() => {
+        getUsuarios();
+    }, [])
+
+
     return(
         <Geral>
             {statusUsuario.type === 'erro' ? <AlertDanger> {statusUsuario.mensagem} </AlertDanger> : ""}
@@ -123,8 +146,6 @@ function AlterarDadosUsuario(){
                     <Titulo> Alterar dados</Titulo>
                 </TabelaTopo>
             </Tabela>
-
-            <button onClick={() => alert()}> ALERT COM O ID </button>
 
 
             <ModalEditar>
@@ -139,14 +160,12 @@ function AlterarDadosUsuario(){
             
                     <CampoModal>
                         <ImagemCpf></ImagemCpf>
-                        <CampoEditar type="text" name="cpf" placeholder="CPF" onChange={valorInput} onKeyUp={(e) => { e.target.value = formatarCPF(e.target.value) }} />
+                        <CampoEditar type="text" name="cpf" placeholder={usuario.cpf} onChange={valorInput} onKeyUp={(e) => { e.target.value = formatarCPF(e.target.value) }} />
                     </CampoModal>
 
                     <CampoModal>
                         <ImagemNascimento></ImagemNascimento>
-                        <CampoNascimento type="date" name="nascimento" placeholder={usuario.nascimento} 
-                        onChange={handleUsuarioChange}
-                    />
+                        <CampoEditar type="date" name="nascimento" value={usuario.nascimento} onChange={handleUsuarioChange} />
                     </CampoModal>
 
                     <CampoModal>

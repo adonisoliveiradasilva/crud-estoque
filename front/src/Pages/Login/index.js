@@ -45,6 +45,13 @@ export function Login({statusLogin}){
           mensagem: responseJson.mensagem,
         });
         
+        localStorage.setItem('id_usuario', responseJson.id);
+        localStorage.setItem('tipo_usuario', responseJson.tipo);
+        localStorage.setItem('nome_usuario', responseJson.nome);
+        localStorage.setItem('nascimento_usuario', responseJson.nascimento);
+        localStorage.setItem('senha_usuario', responseJson.senha);
+        localStorage.setItem('cpf_usuario', responseJson.cpf);
+
         statusLogin(responseJson.tipo);
       }
     }).catch(() => {
