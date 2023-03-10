@@ -24,6 +24,8 @@
 > <img src="https://pics.freeicons.io/uploads/icons/png/19218518301553750371-512.png" width="20" height="20"> Mysql 8.0.30.
 > 
 ### <img src="https://cdn-icons-png.flaticon.com/512/4727/4727496.png" width="20" height="20"> Como configurar o ambiente
+#### Inicialmente 
+>>Clone o repositório "crud-estoque"
 #### Back-End (API)
 >>Baixe algum tipo de servidor web para rodar a API. Nós recomendamos o XAMPP. 
 >
@@ -38,8 +40,6 @@
 >>Baixe e instale o Node.js. Acesse https://nodejs.org/pt-br/download/
 >
 >>Baixe a versão mais nova.
->
->>Clone o repositório "crud-estoque".
 >
 >>Acesse a pasta do repositório e copie a pasta "api-crud-php".
 >
