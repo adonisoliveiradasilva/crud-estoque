@@ -35,7 +35,9 @@
 >
 >>Importe os dados usando o arquivo "banco-crud.sql".
 #### Front-End (React)
->>Baixe e instale o Node.js. Acesse https://nodejs.org/pt-br/download/ e certifique-se de estar baixando a versão mais nova.
+>>Baixe e instale o Node.js. Acesse https://nodejs.org/pt-br/download/
+>
+>>Baixe a versão mais nova.
 >
 >>Clone o repositório "crud-estoque".
 >
