@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from "react";
-import { Geral, Tabela, TabelaTopo, Titulo,  AlertDanger, AlertSucess, ModalEditar,  CampoEditar, BotaoEnviar, CampoModal, ImagemNome, ImagemCpf, ImagemNascimento, ImagemSenha, Form, CampoNascimento, AlertSenha} from "./style";
+import { Geral, Tabela, TabelaTopo, TabelaContent, Titulo,  AlertDanger, AlertSucess, ModalEditar,  CampoEditar, BotaoEnviar, CampoModal, ImagemNome, ImagemCpf, ImagemNascimento, ImagemSenha, Form, CampoNascimento, AlertSenha, TabelaConteudo, ImagemDados} from "./style";
 
 function AlterarDadosUsuario(){
 
@@ -145,49 +145,52 @@ function AlterarDadosUsuario(){
                 <TabelaTopo>
                     <Titulo> Alterar dados</Titulo>
                 </TabelaTopo>
+            
+
+                <TabelaConteudo>
+                    <TabelaContent>
+                        <ImagemDados></ImagemDados>
+                    </TabelaContent>
+
+                    <ModalEditar>
+                        <Form onSubmit={editUsuario}>
+                            {statusSenha.type === 'erro' ? <AlertSenha> {statusSenha.mensagem} </AlertSenha> : ""}
+                            <CampoModal>
+                                <ImagemNome></ImagemNome>
+                                <CampoEditar type="text" name="nome" placeholder={usuario.nome} 
+                                onChange={handleUsuarioChange}
+                            />
+                            </CampoModal>
+                    
+                            <CampoModal>
+                                <ImagemCpf></ImagemCpf>
+                                <CampoEditar type="text" name="cpf" placeholder={usuario.cpf} onChange={valorInput} onKeyUp={(e) => { e.target.value = formatarCPF(e.target.value) }} />
+                            </CampoModal>
+
+                            <CampoModal>
+                                <ImagemNascimento></ImagemNascimento>
+                                <CampoEditar type="date" name="nascimento" value={usuario.nascimento} onChange={handleUsuarioChange} />
+                            </CampoModal>
+
+                            <CampoModal>
+                                <ImagemSenha></ImagemSenha>
+                                <CampoEditar type="text" name="senha" placeholder={"Senha"} 
+                                onChange={handleUsuarioChange}
+                            />
+                            </CampoModal>
+
+                            <CampoModal>
+                                <ImagemSenha></ImagemSenha>
+                                <CampoEditar type="text" name="confirmar_senha" placeholder={"Confirmar senha"} 
+                                onChange={handleUsuarioChange}
+                            />
+                            </CampoModal>
+
+                            <BotaoEnviar type="submit">Salvar</BotaoEnviar>
+                        </Form>
+                    </ModalEditar>
+                </TabelaConteudo>            
             </Tabela>
-
-
-            <ModalEditar>
-                <Form onSubmit={editUsuario}>
-                    {statusSenha.type === 'erro' ? <AlertSenha> {statusSenha.mensagem} </AlertSenha> : ""}
-                    <CampoModal>
-                        <ImagemNome></ImagemNome>
-                        <CampoEditar type="text" name="nome" placeholder={usuario.nome} 
-                        onChange={handleUsuarioChange}
-                    />
-                    </CampoModal>
-            
-                    <CampoModal>
-                        <ImagemCpf></ImagemCpf>
-                        <CampoEditar type="text" name="cpf" placeholder={usuario.cpf} onChange={valorInput} onKeyUp={(e) => { e.target.value = formatarCPF(e.target.value) }} />
-                    </CampoModal>
-
-                    <CampoModal>
-                        <ImagemNascimento></ImagemNascimento>
-                        <CampoEditar type="date" name="nascimento" value={usuario.nascimento} onChange={handleUsuarioChange} />
-                    </CampoModal>
-
-                    <CampoModal>
-                        <ImagemSenha></ImagemSenha>
-                        <CampoEditar type="text" name="senha" placeholder={"Senha"} 
-                        onChange={handleUsuarioChange}
-                    />
-                    </CampoModal>
-
-                    <CampoModal>
-                        <ImagemSenha></ImagemSenha>
-                        <CampoEditar type="text" name="confirmar_senha" placeholder={"Confirmar senha"} 
-                        onChange={handleUsuarioChange}
-                    />
-                    </CampoModal>
-
-                    <BotaoEnviar type="submit">Salvar</BotaoEnviar>
-                </Form>
-            </ModalEditar>
-
-            
-            
         </Geral>
     );
 }

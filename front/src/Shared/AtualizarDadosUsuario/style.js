@@ -13,6 +13,7 @@ import Nome from "../../Imagens/user.png";
 import Cpf from "../../Imagens/cpf.png";
 import Nascimento from "../../Imagens/aniversario.png";
 import Senha from "../../Imagens/senha.png";
+import Dados from "../../Imagens/dados.png";
 
 export const AlertDanger = styled.section`
     width: 250px;
@@ -79,11 +80,60 @@ export const Geral = styled.section`
     -webkit-box-shadow: 0px 10px 11px -6px rgba(0,0,0,0.75);
     -moz-box-shadow: 0px 10px 11px -6px rgba(0,0,0,0.75);
     box-shadow: 0px 10px 11px -6px rgba(0,0,0,0.75);
+    overflow: hidden;
+`;
+
+export const TabelaContent = styled.section`
+    width: calc(100% - 600px); 
+    height: 460px;
+    background-color: #3AB4B9;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media only screen and (max-width: 1150px) {
+      display: none;
+    }
+`;
+
+export const ModalEditar= styled.div`
+    width: 500px;
+    height: 400px;
+    background-color: transparent;
+    position: relative;
+    right: 0;
+    padding-top: 50px;
+    margin: auto;
+    /* -webkit-box-shadow: 0px 10px 11px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 10px 11px -6px rgba(0,0,0,0.75);
+    box-shadow: 0px 10px 11px -6px rgba(0,0,0,0.75); */
+`;
+
+export const TabelaConteudo = styled.table`
+    width: 100%;
+    max-height: 400px;
+    border-collapse: collapse;
+    display: flex;
+    padding: 0px;
 `;
 
 export const Tabela = styled.section`
     width: 100%;
     height: 100%;
+`;
+
+export const ImagemDados = styled.section`
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;    
+    background:  #BCE1E3 url(${Dados});
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 70%;
+    position: relative;
+    margin: auto;
+    
 `;
 
 export const Paginacao = styled.section`
@@ -235,67 +285,6 @@ export const BotaoApagar = styled.button`
     cursor: pointer;
     position: relative;
     margin: 10px;
-`;
-
-export const TabelaConteudo = styled.table`
-    width: 100%;
-    max-height: 400px;
-    border-collapse: collapse;
-    
-    th {
-        background-color: aliceblue;
-        color: #707070;
-        font-weight: 700;
-        padding: 10px;
-    }
-
-    tr {
-        background-color: #D6D6D6;
-        color: #6B6B6B;
-        font-weight: 500;
-        height: 40px;
-        border-top: 2px solid aliceblue;
-        :hover{
-            background-color: #D2E3E2;
-        }
-    }
-
-    td {
-        text-align: center;
-        vertical-align: middle;
-        padding: 10px;
-    }
-
-    tbody {
-        overflow-y: scroll;
-        display: block;
-        max-height: 350px;
-    }
-
-    thead, tbody tr {
-        display: table;
-        width: 100%;
-        table-layout: fixed;
-    }
-
-    thead {
-        width: calc(100% - 1em);
-    }
-
-
-`;
-
-export const ModalEditar= styled.div`
-    width: 400px;
-    height: 550px;
-    background-color: transparent;
-    position: absolute;
-    left: calc(50% - 200px);
-    top: 150px;
-
-    /* -webkit-box-shadow: 0px 10px 11px -6px rgba(0,0,0,0.75);
-    -moz-box-shadow: 0px 10px 11px -6px rgba(0,0,0,0.75);
-    box-shadow: 0px 10px 11px -6px rgba(0,0,0,0.75); */
 `;
 
 export const TopoModalEditar= styled.div`

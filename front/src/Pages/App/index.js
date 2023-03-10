@@ -31,7 +31,7 @@ function App() {
             statusLogin === '1' ? (
               <HomeGerente statusLogin={handleStatusLoginChange} />
             ) : statusLogin === '2' ? (
-              <HomeFuncionario />
+              <HomeFuncionario statusLogin={handleStatusLoginChange}/>
             ) : (
               <Login statusLogin={handleStatusLoginChange} />
             )
