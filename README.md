@@ -24,6 +24,13 @@
 > <img src="https://pics.freeicons.io/uploads/icons/png/19218518301553750371-512.png" width="20" height="20"> Mysql 8.0.30.
 > 
 ### <img src="https://cdn-icons-png.flaticon.com/512/4727/4727496.png" width="20" height="20"> Como configurar o ambiente
+#### Inicialmente 
+>>Clone o repositório "crud-estoque".
+>
+>>Acesse a pasta do repositório e copie a pasta "api-crud-php".
+>
+>>Cole a pasta copiada em C:\xampp\htdocs.
+>
 #### Back-End (API)
 >>Baixe algum tipo de servidor web para rodar a API. Nós recomendamos o XAMPP. 
 >
@@ -39,17 +46,11 @@
 >
 >>Baixe a versão mais nova.
 >
->>Clone o repositório "crud-estoque".
+>>Volte para a pasta do front-end e rode o comando "npm install" para instalar as dependências do Node.js.
 >
->>Acesse a pasta do repositório e copie a pasta "api-crud-php".
+>>Com tudo configurado, rode o comando "npm start" dentro da pasta front 
 >
->>Cole a pasta copiada em C:\xampp\htdocs.
->
->>Volte para a pasta do front-end e rode o comando npm install para instalar as dependências do Node.js.
->
->>Com tudo configurado, rode o comando npm start dentro da pasta front 
->
->>O projetoo será iniciado em "http://localhost:3000".
+>>O projeto será iniciado em "http://localhost:3000".
 
 
 
