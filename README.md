@@ -25,7 +25,12 @@
 > 
 ### <img src="https://cdn-icons-png.flaticon.com/512/4727/4727496.png" width="20" height="20"> Como configurar o ambiente
 #### Inicialmente 
->>Clone o repositório "crud-estoque"
+>>Clone o repositório "crud-estoque".
+>
+>>Acesse a pasta do repositório e copie a pasta "api-crud-php".
+>
+>>Cole a pasta copiada em C:\xampp\htdocs.
+>
 #### Back-End (API)
 >>Baixe algum tipo de servidor web para rodar a API. Nós recomendamos o XAMPP. 
 >
@@ -41,15 +46,11 @@
 >
 >>Baixe a versão mais nova.
 >
->>Acesse a pasta do repositório e copie a pasta "api-crud-php".
+>>Volte para a pasta do front-end e rode o comando "npm install" para instalar as dependências do Node.js.
 >
->>Cole a pasta copiada em C:\xampp\htdocs.
+>>Com tudo configurado, rode o comando "npm start" dentro da pasta front 
 >
->>Volte para a pasta do front-end e rode o comando npm install para instalar as dependências do Node.js.
->
->>Com tudo configurado, rode o comando npm start dentro da pasta front 
->
->>O projetoo será iniciado em "http://localhost:3000".
+>>O projeto será iniciado em "http://localhost:3000".
 
 
 
