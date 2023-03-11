@@ -85,7 +85,7 @@ export const Geral = styled.section`
 
 export const TabelaContent = styled.section`
     width: calc(100% - 600px); 
-    height: 460px;
+    height: calc(90vh - 150px);
     background-color: #3AB4B9;
     position: relative;
     display: flex;

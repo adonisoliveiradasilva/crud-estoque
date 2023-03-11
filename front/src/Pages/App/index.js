@@ -28,9 +28,9 @@ function App() {
         <Route
           path="/"
           element={
-            statusLogin === '1' ? (
+            statusLogin == 1 ? (
               <HomeGerente statusLogin={handleStatusLoginChange} />
-            ) : statusLogin === '2' ? (
+            ) : statusLogin == 2 ? (
               <HomeFuncionario statusLogin={handleStatusLoginChange}/>
             ) : (
               <Login statusLogin={handleStatusLoginChange} />
