@@ -27,14 +27,14 @@
 #### Inicialmente 
 >>Clone o repositório "crud-estoque".
 >
->>Acesse a pasta do repositório e copie a pasta "api-crud-php".
->
->>Cole a pasta copiada em C:\xampp\htdocs.
->
 #### Back-End (API)
 >>Baixe algum tipo de servidor web para rodar a API. Nós recomendamos o XAMPP. 
 >
 >>Para isso, acesse https://www.apachefriends.org/pt_br/download.html e baixe a versão mais recente.
+>
+>>Acesse a pasta do repositório e copie a pasta "api-crud-php".
+>
+>>Cole a pasta copiada em C:\xampp\htdocs.
 >
 >>Inicialize o servidor Apache e o banco MySQL.
 >
