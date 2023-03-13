@@ -40,6 +40,10 @@ function AlterarDadosUsuario(){
             type: '',
             mensagem: '',
         });
+        setStatusSenha({
+            type: '',
+            mensagem: '',
+        });
         }, 5000);
     
         return () => clearTimeout(timeoutId);
@@ -140,7 +144,8 @@ function AlterarDadosUsuario(){
         <Geral>
             {statusUsuario.type === 'erro' ? <AlertDanger> {statusUsuario.mensagem} </AlertDanger> : ""}
             {statusUsuario.type === 'success' ? <AlertSucess> {statusUsuario.mensagem} </AlertSucess> : ""}
-
+            {statusSenha.type === 'erro' ? <AlertSenha> {statusSenha.mensagem} </AlertSenha> : ""}
+            
             <Tabela>
                 <TabelaTopo>
                     <Titulo> Alterar dados</Titulo>
@@ -154,7 +159,7 @@ function AlterarDadosUsuario(){
 
                     <ModalEditar>
                         <Form onSubmit={editUsuario}>
-                            {statusSenha.type === 'erro' ? <AlertSenha> {statusSenha.mensagem} </AlertSenha> : ""}
+                            
                             <CampoModal>
                                 <ImagemNome></ImagemNome>
                                 <CampoEditar type="text" name="nome" placeholder={usuario.nome} 

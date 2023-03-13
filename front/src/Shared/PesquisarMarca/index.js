@@ -164,35 +164,42 @@ function PesquisarMarca(){
             e.preventDefault();
             handleModalCadastro(false);
             
-            await fetch("http://localhost/api-crud-php/cadastrar_marcas.php", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({marca}),
-    
-            })
-            .then((response) => response.json())
-            .then((responseJson) => {
-                console.log(responseJson); 
-                if(responseJson.erro){
-                    setStatusMarca({
-                    type: 'erro',
-                    mensagem: responseJson.mensagem,
-                    })
-                }else{
-                    setStatusMarca({
-                    type: 'success',
-                    mensagem: responseJson.mensagem,
-                    })
-                }
-            }).catch(() => {
+            if(marca.nome == ''){
                 setStatusMarca({
                     type: 'erro', 
-                    mensagem: 'Erro na conexão com API!',
+                    mensagem: "Marca não cadastrada!",
+                })
+            }else{
+
+                await fetch("http://localhost/api-crud-php/cadastrar_marcas.php", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({marca}),
+        
+                })
+                .then((response) => response.json())
+                .then((responseJson) => {
+                    console.log(responseJson); 
+                    if(responseJson.erro){
+                        setStatusMarca({
+                        type: 'erro',
+                        mensagem: responseJson.mensagem,
+                        })
+                    }else{
+                        setStatusMarca({
+                        type: 'success',
+                        mensagem: responseJson.mensagem,
+                        })
+                    }
+                }).catch(() => {
+                    setStatusMarca({
+                        type: 'erro', 
+                        mensagem: 'Erro na conexão com API!',
+                    });
                 });
-            });
-    
+            }
             getMarcas({ id: null });
         }
 

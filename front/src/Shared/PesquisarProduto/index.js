@@ -74,40 +74,47 @@ function PesquisarProduto(){
     }
 
     const cadProduto = async e =>{
-    
         e.preventDefault();
         handleModalCadastro(false);
         
-        await fetch("http://localhost/api-crud-php/cadastrar_produto.php", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({produto}),
-
-        })
-        .then((response) => response.json())
-        .then((responseJson) => {
-            console.log(responseJson); 
-            if(responseJson.erro){
-                setStatusProduto({
-                type: 'erro',
-                mensagem: responseJson.mensagem,
-                })
-            }else{
-                setStatusProduto({
-                type: 'success',
-                mensagem: responseJson.mensagem,
-                })
-            }
-        }).catch(() => {
+        if(produto.nome == ''){
             setStatusProduto({
                 type: 'erro', 
-                mensagem: 'Erro na conexão com API!',
-            });
-        });
+                mensagem: "Produto não cadastrado!",
+            })
+        }else{
+            
+            await fetch("http://localhost/api-crud-php/cadastrar_produto.php", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({produto}),
 
-        getProdutos({ id: null });
+            })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.log(responseJson); 
+                if(responseJson.erro){
+                    setStatusProduto({
+                    type: 'erro',
+                    mensagem: responseJson.mensagem,
+                    })
+                }else{
+                    setStatusProduto({
+                    type: 'success',
+                    mensagem: responseJson.mensagem,
+                    })
+                }
+            }).catch(() => {
+                setStatusProduto({
+                    type: 'erro', 
+                    mensagem: "Produto não cadastrado!",
+                });
+            });
+        }
+            getProdutos({ id: null });
+        
     }
 
     const handleEditar = (produtoId, produtoNome, produtoMarca, produtoCompra, produtoVenda) => {

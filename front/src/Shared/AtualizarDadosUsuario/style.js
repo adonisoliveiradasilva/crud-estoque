@@ -20,7 +20,7 @@ export const AlertDanger = styled.section`
     height: 20px;
     padding: 10px;
     background-color: red;
-    top: -30px;
+    top: 0px;
     position: absolute;
     left: calc(50% - 132px);
     color: #282828;
@@ -38,7 +38,7 @@ export const AlertSenha = styled.section`
     height: 20px;
     padding: 10px;
     background-color: red;
-    top: -100px;
+    top: 0px;
     position: absolute;
     left: calc(50% - 132px);
     color: #282828;
@@ -56,7 +56,7 @@ export const AlertSucess = styled.section`
     height: 20px;
     padding: 10px;
     background-color: red;
-    top: -30px;
+    top: 0px;
     position: absolute;
     left: calc(50% - 132px);
     color: #282828;
